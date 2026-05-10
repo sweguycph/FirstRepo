@@ -1,0 +1,181 @@
+:root {
+    --bg-color: #030014;
+    --primary-color: #00f3ff;
+    --secondary-color: #ff00ea;
+    --text-color: #ffffff;
+    --danger-color: #ff3366;
+    --font-heading: 'Orbitron', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    background-color: #000;
+    color: var(--text-color);
+    font-family: var(--font-body);
+    overflow: hidden; /* Hide scrollbars for full screen 3D canvas */
+}
+
+/* Three.js canvas should take full screen */
+canvas {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+#ui-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Let clicks pass through to the 3D canvas */
+    z-index: 10;
+}
+
+#hud-top-left {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    font-family: var(--font-heading);
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color);
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.hud-item {
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+#crosshair {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(0, 243, 255, 0.5);
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    pointer-events: none;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(3, 0, 20, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    z-index: 20;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.overlay h1 {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 20px var(--primary-color), 0 0 40px var(--primary-color);
+    text-align: center;
+}
+
+.overlay p {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.highlight {
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+button {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 15px 40px;
+    color: var(--bg-color);
+    background: var(--primary-color);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background: white;
+    box-shadow: 0 0 30px white, 0 0 50px var(--primary-color);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* Glitch effect for title */
+.glitch {
+    position: relative;
+}
+
+.glitch::before, .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+
+.glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 var(--secondary-color);
+    animation: glitch-anim 2s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+    left: -2px;
+    text-shadow: 2px 0 var(--primary-color);
+    animation: glitch-anim 3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% { clip-path: inset(20% 0 80% 0); }
+    20% { clip-path: inset(60% 0 10% 0); }
+    40% { clip-path: inset(40% 0 50% 0); }
+    60% { clip-path: inset(80% 0 5% 0); }
+    80% { clip-path: inset(10% 0 70% 0); }
+    100% { clip-path: inset(30% 0 20% 0); }
+}

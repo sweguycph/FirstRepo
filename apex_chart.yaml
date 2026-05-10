@@ -1,0 +1,46 @@
+type: custom:apexcharts-card
+apex_config:
+  chart:
+    height: 350px
+experimental:
+  color_threshold: true
+graph_span: 24h
+header:
+  title: Elpriser pr. time (kr/kWh)
+  show: true
+span:
+  start: hour
+  offset: '-2h'
+now:
+  show: true
+  label: Nu
+yaxis:
+  - min: 0
+    apex_config:
+      tickAmount: 5
+series:
+  - entity: sensor.energi_data_service
+    type: column
+    data_generator: |
+      var today = entity.attributes.raw_today.map((start, index) => {
+        return [new Date(start["hour"]).getTime(), entity.attributes.raw_today[index]["price"]];
+      });
+      if (entity.attributes.tomorrow_valid) {
+        var tomorrow = entity.attributes.raw_tomorrow.map((start, index) => {
+          return [new Date(start["hour"]).getTime(), entity.attributes.raw_tomorrow[index]["price"]];
+        });
+        var data = today.concat(tomorrow);
+      } else {
+        var data = today
+      }
+      return data;
+    float_precision: 2
+    color_threshold:
+      - value: 0
+        color: green
+      - value: 2
+        color: orange
+      - value: 3.5
+        color: red
+      - value: 5
+        color: darkred

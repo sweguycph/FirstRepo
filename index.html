@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Strike 3D</title>
+    <!-- Google Fonts for futuristic typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Load Three.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <!-- Three.js will inject its canvas here -->
+
+    <!-- UI Overlays -->
+    <div id="ui-layer">
+        <div id="hud-top-left">
+            <div class="hud-item">SPEED: <span id="speed-display">0</span> u/s</div>
+            <div class="hud-item">ALT: <span id="alt-display">0</span></div>
+        </div>
+        
+        <div id="crosshair">+</div>
+
+        <!-- Start Menu Overlay -->
+        <div id="start-menu" class="overlay active">
+            <h1 class="glitch" data-text="COSMIC STRIKE 3D">COSMIC STRIKE 3D</h1>
+            <p>Use <span class="highlight">W/S</span> to Thrust and <span class="highlight">A/D</span> or <span class="highlight">Mouse</span> to Steer.</p>
+            <button id="start-btn">ENGAGE</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
