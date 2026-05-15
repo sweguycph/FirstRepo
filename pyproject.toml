@@ -1,0 +1,7 @@
+[tool.pyrefly]
+project-excludes = [
+    "f:/__pyrefly_virtual__/**",
+    "**/*.yaml",
+    "**/*.yml",
+    "**/.venv/**"
+]
